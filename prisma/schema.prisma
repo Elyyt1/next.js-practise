@@ -22,15 +22,18 @@ model User {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   price       Float
   description String?
   imageUrl    String?
   categoryId  Int?
-  category    Category?   @relation(fields: [categoryId], references: [id])
-  createdAt   DateTime @default(now())
+  category    Category? @relation(fields: [categoryId], references: [id])
+  discountId  Int?
+  discount    Discount? @relation(fields: [discountId], references: [id])
+  createdAt   DateTime  @default(now())
 }
+
 model Category {
   id        Int       @id @default(autoincrement())
   name      String    @unique
@@ -44,18 +47,6 @@ model Discount {
   description   String?
   startDate     DateTime
   endDate       DateTime
+  products      Product[]
   createdAt     DateTime  @default(now())
-}
-
-model Product {
-  id          Int       @id @default(autoincrement())
-  name        String
-  price       Float
-  description String?
-  imageUrl    String?
-  categoryId  Int?
-  category    Category? @relation(fields: [categoryId], references: [id])
-  discountId  Int?
-  discount    Discount? @relation(fields: [discountId], references: [id])
-  createdAt   DateTime  @default(now())
 }

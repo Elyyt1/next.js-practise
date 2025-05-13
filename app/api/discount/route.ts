@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     if (!percentage || !startDate || !endDate) {
       return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
     }
-
+    
     const discount = await prisma.discount.create({
       data: {
         percentage,
