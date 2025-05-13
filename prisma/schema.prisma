@@ -37,3 +37,25 @@ model Category {
   products  Product[]
   createdAt DateTime  @default(now())
 }
+
+model Discount {
+  id            Int       @id @default(autoincrement())
+  percentage    Float     // от 0 до 100
+  description   String?
+  startDate     DateTime
+  endDate       DateTime
+  createdAt     DateTime  @default(now())
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String
+  price       Float
+  description String?
+  imageUrl    String?
+  categoryId  Int?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  discountId  Int?
+  discount    Discount? @relation(fields: [discountId], references: [id])
+  createdAt   DateTime  @default(now())
+}
