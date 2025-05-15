@@ -14,7 +14,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
     const discount = await prisma.discount.findUnique({
       where: { id },
-      include: { products: true }
+    //   include: { products: true }
     });
 
     if (!discount) {
